@@ -1,4 +1,4 @@
-# DivideWords
+# StatWordOfPoem
 统计诗人的用词频率
 
 ### 用法
