@@ -10,15 +10,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud, STOPWORDS
 import jieba
-async def get_content(url):
-        # async with是异步上下文管理器
-        async with aiohttp.ClientSession() as session:  # 获取session
-            async with session.request('GET', url) as resp:  # 提出请求
-                if resp.status != 200:
-                    return ''
-                return await resp.read()
 
-async def doTask(domain, url, f):
+
+async def do_task(domain, url, f):
     print(url)
     async with aiohttp.ClientSession() as session:  # 获取session
         async with session.request('GET', url) as resp:  # 提出请求
@@ -76,7 +70,7 @@ def main():
         f.seek(0)
         f.truncate()  # 清空文件
         loop = asyncio.get_event_loop()           # 获取事件循环
-        tasks = [doTask(domain, url, f) for url in pageUrls]  # 把所有任务放到一个列表中
+        tasks = [do_task(domain, url, f) for url in pageUrls]  # 把所有任务放到一个列表中
         loop.run_until_complete(asyncio.wait(tasks)) # 激活协程
         loop.close()  # 关闭事件循环
 
